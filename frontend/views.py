@@ -4,8 +4,8 @@ from django.template import loader
 
 from .models import *
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+def mainPage(request):
+    return render(request, 'mainPage.html', {})
 
 def tpl(request):
     template = loader.get_template('tpl.html')

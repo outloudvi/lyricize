@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">Lyricize <small>your life with hearty lyrics.</small></h1>
+    <p>Life is complicated, life is simple. Life needs music to make it beautiful. Melody is the light and lyrics is the key.</p>
+    {% if user.is_authenticated %}
+    {% else %}
+    <p><a class="btn btn-primary" href="/register" role="button">Register &raquo;</a> <a class="btn btn-success" href="/login" role="button">Login &raquo;</a></p>
+    {% endif %}
+    
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <!-- TODO: Add cards  -->
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}
+
+{% block style %}
+<style>
+h1.display-3 small{
+  font-size: 50%
+}
+</style>
+{% endblock %}
