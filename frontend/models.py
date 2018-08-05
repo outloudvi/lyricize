@@ -26,7 +26,7 @@ class Category(models.Model):
   def __str__(self):
     return self.name
 
-class Quote(models.Model):
+class Lyric(models.Model):
   text = models.TextField(blank=True)
   user = models.ForeignKey(User,on_delete=models.CASCADE)
   author = models.ForeignKey(Author,on_delete=models.CASCADE)

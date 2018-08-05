@@ -5,5 +5,5 @@ from .models import *
 admin.site.register(User)
 admin.site.register(Author)
 admin.site.register(Category)
-admin.site.register(Quote)
+admin.site.register(Lyric)
 admin.site.register(Source)
