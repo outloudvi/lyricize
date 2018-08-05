@@ -14,6 +14,12 @@ class Author(models.Model):
   def __str__(self):
     return self.name
 
+class Source(models.Model):
+  name = models.TextField(blank=True)
+  desc = models.TextField(blank=True)
+  def __str__(self):
+    return self.name
+
 class Category(models.Model):
   name = models.TextField(blank=True)
   desc = models.TextField(blank=True)
@@ -25,5 +31,6 @@ class Quote(models.Model):
   user = models.ForeignKey(User,on_delete=models.CASCADE)
   author = models.ForeignKey(Author,on_delete=models.CASCADE)
   category = models.ManyToManyField(Category)
+  source = models.ForeignKey(Source,on_delete=models.CASCADE)
   def __str__(self):
     return self.text
