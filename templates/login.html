@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <h1>Login</h1>
+      <form id="formLogin">
+        {% csrf_token %}
+          <div class="form-group">
+            <label for="txtUsername">Username</label>
+            <input type="text" name="username" class="form-control" id="txtUsername" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="txtPassword">Password</label>
+            <input type="password" name="password" class="form-control" id="txtPassword" placeholder="Password">
+          </div>
+          <button id="btnSubmit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+    <div class="col-12 col-md-8 d-sm-none d-md-block">
+        <table style="height: 100%;">
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  <span class="l1">Beautiful things happens <b>here</b>.</span><br />
+                  <span class="l2">It's Lyricize.</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+let $btnSubmit = $('#btnSubmit');
+$btnSubmit.click( (evt) => {
+  evt.preventDefault();
+  $.ajax({
+    url: '/login.do/',
+    type: 'POST',
+    // Form data
+    data: new FormData(document.querySelector('#formLogin')),
+    contentType: false,
+    processData: false,
+    success: function (data, err) {
+      if (data.status == "success"){
+        $btnSubmit.removeClass()
+          .addClass("btn btn-success")
+          .text("Succeed. Redirecting...");
+        window.location.href = '/';
+      } else if (data.status == "fail"){
+        $btnSubmit.removeClass()
+          .addClass("btn btn-warning")
+          .text("Wrong username or password.");
+        setTimeout( ()=>{
+          $btnSubmit.removeClass()
+          .addClass("btn btn-primary")
+          .text("Login");
+        }, 500 );
+      } else {
+        $btnSubmit.removeClass()
+          .addClass("btn btn-danger")
+          .text("Error.");
+        setTimeout( ()=>{
+          $btnSubmit.removeClass()
+          .addClass("btn btn-primary")
+          .text("Login");
+        }, 500 );
+      }
+    }
+  });
+})
+</script>
+{% endblock %}
+
+{% block style %}
+<style>
+.l1 {
+  font-size: 200%;
+}
+.l2 {
+  font-size: 120%;
+}
+</style>
+{% endblock %}
