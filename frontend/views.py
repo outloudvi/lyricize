@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
 from .models import *
 
@@ -26,6 +27,10 @@ def doLogin(request):
             "status": "fail",
             "user": "",
         })
+
+@login_required
+def submitLyric(request):
+    return render(request, 'submitLyric.html', {})
 
 def tpl(request):
     template = loader.get_template('tpl.html')
