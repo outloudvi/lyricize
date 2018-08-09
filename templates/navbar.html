@@ -16,8 +16,10 @@
           <a class="nav-link" href="#">Add</a>
       </li>
     </ul>
+    {% if user.is_authenticated %}
     <form class="form-inline my-2 my-lg-0">
       <button class="btn btn-outline-info my-2 my-sm-0" type="submit">{{ user.username }}</button>
     </form>
+    {% endif %}
   </div>
 </nav>
