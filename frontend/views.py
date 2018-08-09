@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import *
@@ -11,6 +11,10 @@ def mainPage(request):
 
 def showLogin(request):
     return render(request, 'login.html', {})
+
+def showLogout(request):
+    logout(request)
+    return render(request, 'logout.html', {})
 
 def doLogin(request):
     username = request.POST['username']
