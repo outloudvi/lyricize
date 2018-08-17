@@ -7,18 +7,18 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Quotes</a>
+        <a class="nav-link" href="/q">Quotes</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="#">Add</a>
+          <a class="nav-link" href="/add">Add</a>
       </li>
     </ul>
     {% if user.is_authenticated %}
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-info my-2 my-sm-0" type="submit">{{ user.username }}</button>
+      <a class="btn btn-outline-info my-2 my-sm-0" href='/my'>{{ user.username }}</a>
     </form>
     {% endif %}
   </div>
