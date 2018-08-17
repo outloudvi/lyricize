@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User as sUser
 
-from .models import *
+from .models import User as dUser
+from .models import Lyric
 
 def mainPage(request):
     return render(request, 'mainPage.html', {})
@@ -53,12 +54,12 @@ def doRegister(request):
         })
     if user is not None:
         try:
-            duser = User()
-            duser.uid = user.id
-            duser.desc = desc
-            duser.lastip = lastip
-            duser.email = email
-            duser.save()
+            thisDUser = dUser()
+            thisDUser.uid = user.id
+            thisDUser.desc = desc
+            thisDUser.lastip = lastip
+            thisDUser.email = email
+            thisDUser.save()
             login(request, user)
         except Exception as ext:
             return JsonResponse({
@@ -75,6 +76,14 @@ def doRegister(request):
 @login_required
 def submitLyric(request):
     return render(request, 'submitLyric.html', {})
+
+@login_required
+def myAccount(request):
+    thisUser = sUser.objects.get(username=request.user)
+    thisDUser = dUser.objects.get(uid=thisUser.id)
+    return render(request, 'myAccount.html', {
+        "desc": thisDUser.desc
+    })
 
 def tpl(request):
     template = loader.get_template('tpl.html')

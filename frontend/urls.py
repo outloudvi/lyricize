@@ -10,5 +10,6 @@ urlpatterns = [
     path('login.do/', views.doLogin, name='login_do'),
     path('register/', views.showRegister, name='register'),
     path('register.do/', views.doRegister, name='register_do'),
+    path('my/', views.myAccount, name='register_do'),
     path('tpl/', views.tpl, name='template'),
 ]
