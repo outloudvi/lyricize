@@ -77,6 +77,9 @@ def searchCategory(request, text="", page=1, limit=10):
       "page": page
       })
 
+def searchInterface(request):
+    return render(request, "searchInterface.html")
+
 def doLogin(request):
     username = request.POST['username']
     password = request.POST['password']

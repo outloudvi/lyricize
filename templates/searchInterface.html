@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script src="https://cdn.staticfile.org/popper.js/1.14.4/umd/popper.min.js"></script>
+<div class="container">
+  <div class="headSpace"></div>
+  <h1>Search <small class="text-muted">Seek for things you are thinking of.</small></h1>
+  <hr />
+  <div class="input-group input-group-lg">
+    <input id="inpText" type="text" class="form-control" aria-label="Text input with dropdown button">
+    <div class="input-group-append">
+      <button id="searchBtn" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">Search Text</button>
+      <div class="dropdown-menu">
+        <a id="aText" class="dropdown-item" href="#">Search Text</a>
+        <a id="aAuthor" class="dropdown-item" href="#">Search Author</a>
+        <a id="aSource" class="dropdown-item" href="#">Search Source</a>
+        <a id="aCategory" class="dropdown-item" href="#">Search Category</a>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+      <button id="btnGo" type="button" class="btn btn-primary btn-lg">Search</button>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  var searchType = "t/";
+  var $btn = $('#searchBtn');
+  $('#aText').click(() => {
+    searchType = "t/";
+    $btn.text('Search Text');
+  });
+  $('#aAuthor').click(() => {
+    searchType = "a/";
+    $btn.text('Search Author');
+  });
+  $('#aSource').click(() => {
+    searchType = "s/";
+    $btn.text('Search Source');
+  });
+  $('#aCategory').click(() => {
+    searchType = "c/";
+    $btn.text('Search Category');
+  });
+  $('#btnGo').click(() => {
+    window.location = `/s/${searchType}${$('#inpText').val()}`;
+  });
+</script>
+{% endblock %}
+
+{% block style %}
+<style>
+#btnGo {
+  margin-top: 3rem
+}
+</style>
+{% endblock %}
