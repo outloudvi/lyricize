@@ -2,8 +2,8 @@
 
 {% block content %}
   <div class="container">
-    <h1>Submit lyric</h1>
-    <form>
+    <h1>Submit Lyric</h1>
+    <form id="formSubmit">
         {% csrf_token %}
         <div class="form-group">
             <label for="txtLyric">Lyric</label>
@@ -35,7 +35,44 @@ $('#btnSubmit').click( (evt) => {
       .addClass("btn btn-primary")
       .text("Submit");
     },1000);
+    return;
   }
+  // Do the post
+  $.ajax({
+    url: '/api/s/',
+    type: 'POST',
+    // Form data
+    data: new FormData(document.querySelector('#formSubmit')),
+    contentType: false,
+    processData: false,
+    success: function (data, err) {
+      if (data.status == "success") {
+        $btnSubmit.removeClass()
+          .addClass("btn btn-success")
+          .text("Succeed. Redirecting");
+        window.location.href = '/';
+      } else if (data.status == "fail") {
+        $btnSubmit.removeClass()
+          .addClass("btn btn-danger")
+          .text("Error.");
+        setTimeout(() => {
+          $btnSubmit.removeClass()
+            .addClass("btn btn-primary")
+            .text("Submit");
+        }, 500);
+        console.log(data);
+      } else {
+        $btnSubmit.removeClass()
+          .addClass("btn btn-danger")
+          .text("Error.");
+        setTimeout(() => {
+          $btnSubmit.removeClass()
+            .addClass("btn btn-primary")
+            .text("Submit");
+        }, 500);
+      }
+    }
+  });
 })
 </script>
 {% endblock %}
