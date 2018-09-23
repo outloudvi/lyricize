@@ -12,4 +12,5 @@ urlpatterns = [
     path('register.do/', views.doRegister, name='register_do'),
     path('my/', views.myAccount, name='register_do'),
     path('tpl/', views.tpl, name='template'),
+    path('q/', views.showQuotes, name='quotes')
 ]
