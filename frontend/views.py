@@ -1,25 +1,38 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, JsonResponse  #HttpResponseRedirect,
 from django.template import loader
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User as sUser
+#from django.utils.http import urlquote
 
 from .models import User as dUser
-from .models import Lyric
+from .models import Lyric as dLyric
+
 
 def mainPage(request):
     return render(request, 'mainPage.html', {})
 
+
 def showLogin(request):
     return render(request, 'login.html', {})
+
 
 def showRegister(request):
     return render(request, 'register.html', {})
 
+
 def showLogout(request):
     logout(request)
     return render(request, 'logout.html', {})
+
+
+def showQuotes(request, page=1, limit=10):
+    idFrom = limit * (page - 1)
+    idTo = limit * page
+    data = dLyric.objects.all()[idFrom:idTo]
+    return render(request, 'showquotes.html', {"lyricData": data})
+
 
 def doLogin(request):
     username = request.POST['username']
@@ -36,6 +49,7 @@ def doLogin(request):
             "status": "fail",
             "user": "",
         })
+
 
 def doRegister(request):
     username = request.POST['username']
@@ -63,30 +77,30 @@ def doRegister(request):
             login(request, user)
         except Exception as ext:
             return JsonResponse({
-            "status": "fail",
-            "errorType": type(ext),
-            "errorArg": ext.args,
-            "user": "",
-        })
+                "status": "fail",
+                "errorType": type(ext),
+                "errorArg": ext.args,
+                "user": "",
+            })
         return JsonResponse({
             "status": "success",
             "user": username,
         })
 
+
 @login_required
 def submitLyric(request):
     return render(request, 'submitLyric.html', {})
+
 
 @login_required
 def myAccount(request):
     thisUser = sUser.objects.get(username=request.user)
     thisDUser = dUser.objects.get(uid=thisUser.id)
-    return render(request, 'myAccount.html', {
-        "desc": thisDUser.desc
-    })
+    return render(request, 'myAccount.html', {"desc": thisDUser.desc})
+
 
 def tpl(request):
     template = loader.get_template('tpl.html')
-    context = {
-    }
+    context = {}
     return HttpResponse(template.render(context, request))
