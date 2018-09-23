@@ -33,6 +33,49 @@ def showQuotes(request, page=1, limit=10):
     data = dLyric.objects.all()[idFrom:idTo]
     return render(request, 'showquotes.html', {"lyricData": data})
 
+def searchText(request, text="", page=1, limit=10):
+    fr = limit * (page - 1)
+    tr = limit * page
+    dl = dLyric.objects.filter(text__contains=text)[fr:tr]
+    return render(request, 'searchResult.html', {
+      "lyricData": dl,
+      "keyword": text,
+      "about": "text",
+      "page": page
+      })
+
+def searchAuthor(request, text="", page=1, limit=10):
+    fr = limit * (page - 1)
+    tr = limit * page
+    dl = dLyric.objects.filter(author__contains=text)[fr:tr]
+    return render(request, 'searchResult.html', {
+      "lyricData": dl,
+      "keyword": text,
+      "about": "author",
+      "page": page
+      })
+
+def searchSource(request, text="", page=1, limit=10):
+    fr = limit * (page - 1)
+    tr = limit * page
+    dl = dLyric.objects.filter(source__contains=text)[fr:tr]
+    return render(request, 'searchResult.html', {
+      "lyricData": dl,
+      "keyword": text,
+      "about": "source",
+      "page": page
+      })
+
+def searchCategory(request, text="", page=1, limit=10):
+    fr = limit * (page - 1)
+    tr = limit * page
+    dl = dLyric.objects.filter(category__contains=text)[fr:tr]
+    return render(request, 'searchResult.html', {
+      "lyricData": dl,
+      "keyword": text,
+      "about": "category",
+      "page": page
+      })
 
 def doLogin(request):
     username = request.POST['username']

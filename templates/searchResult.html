@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="headSpace"></div>
+  <h1>Search result: Page {{page}} <small class="text-muted">"{{ keyword }}" in {{about}}</small></h1>
+  <div class="row">
+    {% for lyric in lyricData %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text"> {{ lyric.text }} </p>
+          <small class="card-text text-muted">
+            By {{ lyric.author }} from {{ lyric.source }}<br />
+            Submitted by {{ lyric.user }}
+          </small>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+</script>
+{% endblock %}
+
+{% block style %}
+<style>
+  .card {
+    margin: 0.4rem
+  }
+
+  #cardExample {
+    display: none
+  }
+</style>
+{% endblock %}
