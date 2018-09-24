@@ -13,6 +13,7 @@ urlpatterns = [
     path('my/', views.myAccount, name='register_do'),
     path('tpl/', views.tpl, name='template'),
     path('l/', views.showLyrics, name='r_Lyrics'),
+    path('lyric/<int:id>/', views.showLyric, name='lyric'),
     path('l/<int:page>/', views.showLyrics, name='lyrics'),
     path('s/t/<str:text>/', views.searchText, name='searchText'),
     path('s/a/<str:text>/', views.searchAuthor, name='searchAuthor'),

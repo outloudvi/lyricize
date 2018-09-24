@@ -29,6 +29,9 @@ def showLogout(request):
 def showSubmit(request):
     return render(request, 'submitLyric.html', {})
 
+def showLyric(request, id):
+    lyric = dLyric.objects.get(pk=id)
+    return render(request, 'showLyric.html', { "lyric": lyric })
 
 def showLyrics(request, page=1, limit=10):
     idFrom = limit * (page - 1)
