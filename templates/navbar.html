@@ -6,17 +6,17 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li id="liHome" class="nav-item">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li id="liLyrics" class="nav-item">
         <a class="nav-link" href="/l">Lyrics</a>
       </li>
-      <li class="nav-item">
+      <li id="liSearch" class="nav-item">
           <a class="nav-link" href="/s">Search</a>
       </li>
       {% if user.is_authenticated %}
-      <li class="nav-item">
+      <li id="liSubmit" class="nav-item">
           <a class="nav-link" href="/new">Submit</a>
       </li>
       {% endif %}
