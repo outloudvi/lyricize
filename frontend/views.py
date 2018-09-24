@@ -27,11 +27,11 @@ def showLogout(request):
     return render(request, 'logout.html', {})
 
 
-def showQuotes(request, page=1, limit=10):
+def showLyrics(request, page=1, limit=10):
     idFrom = limit * (page - 1)
     idTo = limit * page
     data = dLyric.objects.all()[idFrom:idTo]
-    return render(request, 'showquotes.html', {"lyricData": data})
+    return render(request, 'showLyrics.html', {"lyricData": data})
 
 def searchText(request, text="", page=1, limit=10):
     fr = limit * (page - 1)
