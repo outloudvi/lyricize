@@ -26,6 +26,9 @@ def showLogout(request):
     logout(request)
     return render(request, 'logout.html', {})
 
+def showSubmit(request):
+    return render(request, 'submitLyric.html', {})
+
 
 def showLyrics(request, page=1, limit=10):
     idFrom = limit * (page - 1)

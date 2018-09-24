@@ -19,4 +19,5 @@ urlpatterns = [
     path('s/s/<str:text>/', views.searchSource, name='searchSource'),
     path('s/c/<str:text>/', views.searchCategory, name='searchCategory'),
     path('s/', views.searchInterface, name='searchInterface'),
+    path('new/', views.showSubmit, name='searchInterface'),
 ]

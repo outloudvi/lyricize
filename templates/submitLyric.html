@@ -1,79 +1,84 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container">
-    <h1>Submit Lyric</h1>
-    <form id="formSubmit">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="txtLyric">Lyric</label>
-            <textarea type="text" name="lyric" class="form-control" id="txtLyric" placeholder="Enter lyric..."></textarea>
-        </div>
-        <div class="form-group">
-            <label for="txtAuthor">Author</label>
-            <input type="text" name="author" class="form-control" id="txtAuthor" placeholder="foo, bar, ...">
-        </div>
-        <div class="form-group">
-            <label for="txtSource">Lyric</label>
-            <input type="text" name="source" class="form-control" id="txtLyric" placeholder='Optional: Source (e.g. "Melt")'>
-        </div>
-      <button id="btnSubmit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
+<div class="container">
+  <h1>Submit Lyric</h1>
+  <form id="formSubmit">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="txtLyric">Lyric</label>
+      <textarea type="text" name="lyric" class="form-control" id="txtLyric" placeholder="Enter lyric..."></textarea>
+    </div>
+    <div class="form-group">
+      <label for="txtAuthor">Author</label>
+      <input type="text" name="author" class="form-control" id="txtAuthor" placeholder="foo, bar, ...">
+    </div>
+    <div class="form-group">
+      <label for="txtSource">Category</label>
+      <input type="text" name="category" class="form-control" id="txtCategory" placeholder='Categories'>
+    </div>
+    <div class="form-group">
+      <label for="txtSource">Source</label>
+      <input type="text" name="source" class="form-control" id="txtLyric" placeholder='Optional: Source (e.g. "Melt")'>
+    </div>
+    <button id="btnSubmit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
 {% endblock %}
 
 {% block script %}
 <script>
-$('#btnSubmit').click( (evt) => {
-  evt.preventDefault();
-  if ($('#txtAuthor').val() == "" || $('#txtLyric')[0].value == ""){
-    $('#btnSubmit').removeClass()
-      .addClass("btn btn-warning")
-      .text("Somewhere is empty...");
-    setTimeout(()=>{
-      $('#btnSubmit').removeClass()
-      .addClass("btn btn-primary")
-      .text("Submit");
-    },1000);
-    return;
-  }
-  // Do the post
-  $.ajax({
-    url: '/api/s/',
-    type: 'POST',
-    // Form data
-    data: new FormData(document.querySelector('#formSubmit')),
-    contentType: false,
-    processData: false,
-    success: function (data, err) {
-      if (data.status == "success") {
+  let $btnSubmit = $('#btnSubmit');
+  $btnSubmit.click((evt) => {
+    evt.preventDefault();
+    if ($('#txtAuthor').val() == "" || $('#txtLyric')[0].value == "") {
+      $btnSubmit.removeClass()
+        .addClass("btn btn-warning")
+        .text("Somewhere is empty...");
+      setTimeout(() => {
         $btnSubmit.removeClass()
-          .addClass("btn btn-success")
-          .text("Succeed. Redirecting");
-        window.location.href = '/';
-      } else if (data.status == "fail") {
-        $btnSubmit.removeClass()
-          .addClass("btn btn-danger")
-          .text("Error.");
-        setTimeout(() => {
-          $btnSubmit.removeClass()
-            .addClass("btn btn-primary")
-            .text("Submit");
-        }, 500);
-        console.log(data);
-      } else {
-        $btnSubmit.removeClass()
-          .addClass("btn btn-danger")
-          .text("Error.");
-        setTimeout(() => {
-          $btnSubmit.removeClass()
-            .addClass("btn btn-primary")
-            .text("Submit");
-        }, 500);
-      }
+          .addClass("btn btn-primary")
+          .text("Submit");
+      }, 1000);
+      return;
     }
-  });
-})
+    // Do the post
+    $.ajax({
+      url: '/api/s/',
+      type: 'POST',
+      // Form data
+      data: new FormData(document.querySelector('#formSubmit')),
+      contentType: false,
+      processData: false,
+      success: function (data, err) {
+        if (data.status == "success") {
+          $btnSubmit.removeClass()
+            .addClass("btn btn-success")
+            .text("Succeed. Redirecting");
+          window.location.href = '/';
+        } else if (data.status == "fail") {
+          $btnSubmit.removeClass()
+            .addClass("btn btn-danger")
+            .text("Error.");
+          setTimeout(() => {
+            $btnSubmit.removeClass()
+              .addClass("btn btn-primary")
+              .text("Submit");
+          }, 500);
+          console.log(data);
+        } else {
+          $btnSubmit.removeClass()
+            .addClass("btn btn-danger")
+            .text("Error.");
+          setTimeout(() => {
+            $btnSubmit.removeClass()
+              .addClass("btn btn-primary")
+              .text("Submit");
+          }, 500);
+        }
+      }
+    });
+  })
 </script>
 {% endblock %}
 
