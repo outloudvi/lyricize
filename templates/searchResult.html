@@ -12,7 +12,7 @@
           <p class="card-text"> {{ lyric.text }} </p>
           <small class="card-text text-muted">
             By {{ lyric.author }} from {{ lyric.source }}<br />
-            Submitted by {{ lyric.user }}
+            Submitted by {{ lyric.user }} - <a href="/lyric/{{lyric.id}}">#{{ lyric.id }}</a>
           </small>
         </div>
       </div>
