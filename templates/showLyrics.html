@@ -17,12 +17,28 @@
     </div>
     {% endfor %}
   </div>
+  <hr />
+  <div class="text-center">
+    <a id="btnLeft">
+      <button class="btn btn-outline-primary">&lt;&lt;</button>
+    </a>
+    <span id="pageMark"> {{ page }} </span>
+    <a id="btnRight">
+      <button class="btn btn-outline-primary">&gt;&gt;</button>
+    </a>
+  </div>
 </div>
 {% endblock %}
 
 {% block script %}
 <script>
-
+  var currPage = Number("{{ page }}");
+  var isFullpage = Number("{{ fullPage }}");
+  if (currPage == 1) $('#btnLeft').hide();
+  if (!isFullpage) $('#btnRight').hide();
+  if (currPage == 1 & !isFullpage) $('#pageMark').hide();
+  $('#btnLeft').attr('href', `/l/${currPage - 1}`);
+  $('#btnRight').attr('href', `/l/${currPage + 1}`);
 </script>
 {% endblock %}
 
@@ -34,6 +50,11 @@
 
   #cardExample {
     display: none
+  }
+
+  #pageMark {
+    font-size: 1.3rem;
+    margin: 0 30px;
   }
 </style>
 {% endblock %}

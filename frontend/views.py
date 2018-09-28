@@ -9,6 +9,11 @@ from django.contrib.auth.models import User as sUser
 from .models import User as dUser
 from .models import Lyric as dLyric
 
+def fullPage(length, limit=10):
+    if (length == limit):
+        return 1
+    else:
+        return 0
 
 def mainPage(request):
     return render(request, 'mainPage.html', {})
@@ -37,7 +42,11 @@ def showLyrics(request, page=1, limit=10):
     idFrom = limit * (page - 1)
     idTo = limit * page
     data = dLyric.objects.all()[idFrom:idTo]
-    return render(request, 'showLyrics.html', {"lyricData": data})
+    return render(request, 'showLyrics.html', {
+        "lyricData": data,
+        "page": page,
+        "fullPage": fullPage(len(data),limit)
+    })
 
 def searchText(request, text="", page=1, limit=10):
     fr = limit * (page - 1)
@@ -47,7 +56,8 @@ def searchText(request, text="", page=1, limit=10):
       "lyricData": dl,
       "keyword": text,
       "about": "text",
-      "page": page
+      "page": page,
+      "fullPage": fullPage(len(dl),limit)
       })
 
 def searchAuthor(request, text="", page=1, limit=10):
@@ -58,7 +68,8 @@ def searchAuthor(request, text="", page=1, limit=10):
       "lyricData": dl,
       "keyword": text,
       "about": "author",
-      "page": page
+      "page": page,
+      "fullPage": fullPage(len(dl),limit)
       })
 
 def searchSource(request, text="", page=1, limit=10):
@@ -69,7 +80,8 @@ def searchSource(request, text="", page=1, limit=10):
       "lyricData": dl,
       "keyword": text,
       "about": "source",
-      "page": page
+      "page": page,
+      "fullPage": fullPage(len(dl),limit)
       })
 
 def searchCategory(request, text="", page=1, limit=10):
@@ -80,7 +92,8 @@ def searchCategory(request, text="", page=1, limit=10):
       "lyricData": dl,
       "keyword": text,
       "about": "category",
-      "page": page
+      "page": page,
+      "fullPage": fullPage(len(dl),limit)
       })
 
 def searchInterface(request):
