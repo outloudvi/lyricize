@@ -55,7 +55,7 @@
           $btnSubmit.removeClass()
             .addClass("btn btn-success")
             .text("Succeed. Redirecting");
-          window.location.href = '/';
+          window.location.href = `/lyric/${data.id}`;
         } else if (data.status == "fail") {
           $btnSubmit.removeClass()
             .addClass("btn btn-danger")
