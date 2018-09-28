@@ -19,13 +19,16 @@
         </div>
       </div>
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-1">
+    </div>
+    <div id="idShow">#{{ lyric.id }}</div>
   </div>
 </div>
 {% endblock %}
 
 {% block script %}
 <script>
+  $('#idShow').css('right', window.innerWidth - $('.col-md-1')[1].offsetLeft * 1.1 );
 </script>
 {% endblock %}
 
@@ -33,6 +36,26 @@
 <style>
   h5.card-title {
     font-size: 1.5rem
+  }
+  #rightCol {
+    text-align: right;
+    font-size: 3rem;
+    overflow: hidden;
+  }
+  .card {
+    opacity: 0.7;
+  }
+  @media screen and (max-width: 350px) {
+    #idShow {
+      display: none
+    }
+  }
+  #idShow {
+    position: absolute;
+    font-size: 10rem;
+    color: #bbbbbb;
+    z-index: -1;
+    margin-top: -50px;
   }
 </style>
 {% endblock %}
