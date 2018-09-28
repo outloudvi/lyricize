@@ -28,7 +28,12 @@
 
 {% block script %}
 <script>
-  $('#idShow').css('right', window.innerWidth - $('.col-md-1')[1].offsetLeft * 1.1 );
+  let rightColLeft = $('.col-md-1')[1].offsetLeft;
+  if (rightColLeft != 0) {
+    $('#idShow').css('right', window.innerWidth - $('.col-md-1')[1].offsetLeft * 1.1 );
+  } else {
+    $('#idShow').css('right', window.innerWidth * 0.1 );
+  }
 </script>
 {% endblock %}
 
