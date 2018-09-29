@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="container">
+  <div class="beforeHead"></div>
   <h1>You have been successfully logged out.</h1>
   <div><a class="btn btn-outline-success" href="/login">Login</a> <a class="btn btn-outline-primary" href="/">Mainpage</a></div>
 </div>
@@ -14,5 +15,8 @@
 
 {% block style %}
 <style>
+  .beforeHead {
+    height: 30px
+  }
 </style>
 {% endblock %}
