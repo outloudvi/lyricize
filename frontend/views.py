@@ -9,7 +9,7 @@ from django.contrib.auth.models import User as sUser
 from .models import User as dUser
 from .models import Lyric as dLyric
 
-def fullPage(length, limit=10):
+def fullPage(length, limit=9):
     if (length == limit):
         return 1
     else:
@@ -38,7 +38,7 @@ def showLyric(request, id):
     lyric = dLyric.objects.get(pk=id)
     return render(request, 'showLyric.html', { "lyric": lyric })
 
-def showLyrics(request, page=1, limit=10):
+def showLyrics(request, page=1, limit=9):
     idFrom = limit * (page - 1)
     idTo = limit * page
     data = dLyric.objects.all()[idFrom:idTo]
@@ -48,7 +48,7 @@ def showLyrics(request, page=1, limit=10):
         "fullPage": fullPage(len(data),limit)
     })
 
-def searchText(request, text="", page=1, limit=10):
+def searchText(request, text="", page=1, limit=9):
     fr = limit * (page - 1)
     tr = limit * page
     dl = dLyric.objects.filter(text__contains=text)[fr:tr]
@@ -60,7 +60,7 @@ def searchText(request, text="", page=1, limit=10):
       "fullPage": fullPage(len(dl),limit)
       })
 
-def searchAuthor(request, text="", page=1, limit=10):
+def searchAuthor(request, text="", page=1, limit=9):
     fr = limit * (page - 1)
     tr = limit * page
     dl = dLyric.objects.filter(author__contains=text)[fr:tr]
@@ -72,7 +72,7 @@ def searchAuthor(request, text="", page=1, limit=10):
       "fullPage": fullPage(len(dl),limit)
       })
 
-def searchSource(request, text="", page=1, limit=10):
+def searchSource(request, text="", page=1, limit=9):
     fr = limit * (page - 1)
     tr = limit * page
     dl = dLyric.objects.filter(source__contains=text)[fr:tr]
@@ -84,7 +84,7 @@ def searchSource(request, text="", page=1, limit=10):
       "fullPage": fullPage(len(dl),limit)
       })
 
-def searchCategory(request, text="", page=1, limit=10):
+def searchCategory(request, text="", page=1, limit=9):
     fr = limit * (page - 1)
     tr = limit * page
     dl = dLyric.objects.filter(category__contains=text)[fr:tr]
@@ -96,7 +96,7 @@ def searchCategory(request, text="", page=1, limit=10):
       "fullPage": fullPage(len(dl),limit)
       })
 
-def showContrib(request, username="", page=1, limit=10):
+def showContrib(request, username="", page=1, limit=9):
     fr = limit * (page - 1)
     tr = limit * page
     theUser = sUser.objects.get(username=username)
