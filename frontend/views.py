@@ -96,6 +96,19 @@ def searchCategory(request, text="", page=1, limit=10):
       "fullPage": fullPage(len(dl),limit)
       })
 
+def showContrib(request, username="", page=1, limit=10):
+    fr = limit * (page - 1)
+    tr = limit * page
+    theUser = sUser.objects.get(username=username)
+    dl = dLyric.objects.filter(user=theUser)[fr:tr]
+    return render(request, 'searchResult.html', {
+      "lyricData": dl,
+      "keyword": username,
+      "about": "user",
+      "page": page,
+      "fullPage": fullPage(len(dl),limit)
+      })
+
 def searchInterface(request):
     return render(request, "searchInterface.html")
 
