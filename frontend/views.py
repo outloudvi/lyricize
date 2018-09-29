@@ -16,7 +16,10 @@ def fullPage(length, limit=9):
         return 0
 
 def mainPage(request):
-    return render(request, 'mainPage.html', {})
+    return render(request, 'mainPage.html', {
+        "lyricTotal": len( dLyric.objects.all() ),
+        "userTotal": len( dUser.objects.all() )
+    })
 
 
 def showLogin(request):

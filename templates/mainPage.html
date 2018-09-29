@@ -5,12 +5,14 @@
   <div class="container">
     <h1 class="display-3">Lyricize <small>your life with hearty lyrics.</small></h1>
     <p>Life is complicated. Life is simple. Life needs music to make it beautiful. Melody is the light and lyric is the key.</p>
+    <p class="statistics"><b>{{ userTotal }}</b> users have contributed <b>{{ lyricTotal }}</b> lyrics in total.
     {% if user.is_authenticated %}
+    </p>
     <p><a class="btn btn-primary" href="/new" role="button">Submit lyric &raquo;</a> <a class="btn btn-success" href="/my" role="button">My account &raquo;</a></p>
     {% else %}
+    Do you wanna join us?</p>
     <p><a class="btn btn-primary" href="/register" role="button">Register &raquo;</a> <a class="btn btn-success" href="/login" role="button">Login &raquo;</a></p>
     {% endif %}
-    
   </div>
 </div>
 <div class="container">
@@ -29,6 +31,9 @@
 <style>
 h1.display-3 small{
   font-size: 50%
+}
+.statistics {
+  font-size: 150%
 }
 </style>
 {% endblock %}
