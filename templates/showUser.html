@@ -11,7 +11,7 @@
       <a href="/u/{{user.username}}/contrib" class="btn btn-primary"> Contributions</a>
     </div>
     <div class="col-lg-4 col-xs-12">
-      {% if userS.username == request.user %}
+      {% if userS.id == request.user.id %}
       <a href="/logout" class="btn btn-info">Logout</a>
       {% endif %}
     </div>
