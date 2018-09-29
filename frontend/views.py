@@ -99,6 +99,23 @@ def searchCategory(request, text="", page=1, limit=10):
 def searchInterface(request):
     return render(request, "searchInterface.html")
 
+def showUser(request,username):
+    thisUser = sUser.objects.get(username=username)
+    thisDUser = dUser.objects.get(uid=thisUser.id)
+    return render(request, "showUser.html", {
+        "userS": thisUser,
+        "userD": thisDUser,
+        "contribCount": len( dLyric.objects.filter(user=thisUser) )
+    })
+x = """
+def showContrib(request,username):
+    thisUser = sUser.objects.get(username=username)
+    thisDUser = dUser.objects.get(uid=thisUser.id)
+    return render(request, "showUserContrib.html", {
+        "userS": thisUser,
+        "userD": thisDUser
+    })
+"""
 def doLogin(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -160,9 +177,7 @@ def submitLyric(request):
 
 @login_required
 def myAccount(request):
-    thisUser = sUser.objects.get(username=request.user)
-    thisDUser = dUser.objects.get(uid=thisUser.id)
-    return render(request, 'myAccount.html', {"desc": thisDUser.desc})
+    return showUser(request,username=request.user)
 
 
 def tpl(request):
