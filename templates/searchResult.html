@@ -3,7 +3,11 @@
 {% block content %}
 <div class="container">
   <div class="headSpace"></div>
-  <h1>Search result <small class="text-muted">"{{ keyword }}" in {{about}}</small></h1>
+   {% if about != "user" %}
+   <h1>Search result <small class="text-muted">"{{ keyword }}" in {{about}}</small></h1>
+   {% else %}
+   <h1>Contributions <small class="text-muted">of {{ keyword }}</small></h1>
+   {% endif %}
   <div class="row">
     {% for lyric in lyricData %}
     <div class="col-12 col-md-6 col-lg-4">
