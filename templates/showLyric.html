@@ -13,16 +13,13 @@
         <div class="card-header">
           By {{ lyric.author }} <br />
           From {{ lyric.source }}<br />
-          Submitted by <a href="/u/{{ lyric.user }}">{{ lyric.user }}</a> <br />
+          Categories: {{ lyric.category }}<br />
           <hr />
-          Categories: {{ lyric.category }}
-        </div>
-      </div>
-      <div class="cSpace"></div>
-      <div class="card">
-        <div class="card-header">
+          Submitted by <a href="/u/{{ lyric.user }}">{{ lyric.user }}</a>
+          {% if lyric.desc %}
+          , saying:
           <div id="divDesc"></div>
-          <div id="divDescMarkdown">{{ lyric.desc }}</div>
+          {% endif %}
         </div>
       </div>
       {% if request.user.is_staff or request.user == lyric.user %}
@@ -36,6 +33,7 @@
     </div>
     <div id="idShow">#{{ lyric.id }}</div>
   </div>
+  <div id="divDescMarkdown">{{ lyric.desc }}</div>
 </div>
 {% endblock %}
 
