@@ -15,6 +15,7 @@ def submitLyric(request):
     lyric.author = request.POST['author']
     lyric.source = request.POST['source']
     lyric.category = request.POST['category']
+    lyric.desc = request.POST['desc']
     lyric.user = request.user
     try:
         lyric.save()

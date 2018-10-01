@@ -11,14 +11,19 @@
           <h5 class="card-title">{{ lyric.text|linebreaksbr }}</h5>
         </div>
         <div class="card-header">
-            By {{ lyric.author }} <br />
-            From {{ lyric.source }}<br />
-            Submitted by <a href="/u/{{ lyric.user }}">{{ lyric.user }}</a> <br />
-            <hr />
-            Categories: {{ lyric.category }}
+          By {{ lyric.author }} <br />
+          From {{ lyric.source }}<br />
+          Submitted by <a href="/u/{{ lyric.user }}">{{ lyric.user }}</a> <br />
+          <hr />
+          Categories: {{ lyric.category }}
         </div>
       </div>
-    </div>
+      <div class="cSpace"></div>
+      <div class="card">
+        <div class="card-header">
+          <div id="divDesc"></div>
+          <div id="divDescMarkdown">{{ lyric.desc }}</div>
+        </div>
     <div class="col-md-1">
     </div>
     <div id="idShow">#{{ lyric.id }}</div>
@@ -30,10 +35,14 @@
 <script>
   let rightColLeft = $('.col-md-1')[1].offsetLeft;
   if (rightColLeft != 0) {
-    $('#idShow').css('right', window.innerWidth - $('.col-md-1')[1].offsetLeft * 1.1 );
+    $('#idShow').css('right', window.innerWidth - $('.col-md-1')[1].offsetLeft * 1.1);
   } else {
-    $('#idShow').css('right', window.innerWidth * 0.1 );
+    $('#idShow').css('right', window.innerWidth * 0.1);
   }
+</script>
+<script src="https://cdn.staticfile.org/marked/0.5.1/marked.min.js"></script>
+<script>
+  $('#divDesc').html(marked($('#divDescMarkdown').text()));
 </script>
 {% endblock %}
 
@@ -42,25 +51,41 @@
   h5.card-title {
     font-size: 1.5rem
   }
+
   #rightCol {
     text-align: right;
     font-size: 3rem;
     overflow: hidden;
   }
+
   .card {
     opacity: 0.7;
   }
+
   @media screen and (max-width: 350px) {
     #idShow {
       display: none
     }
   }
+
   #idShow {
     position: absolute;
     font-size: 10rem;
     color: #bbbbbb;
     z-index: -1;
     margin-top: -50px;
+  }
+
+  #divDescMarkdown {
+    display: none;
+  }
+
+  .cSpace {
+    height: 2vh;
+  }
+
+  .card-header p {
+    margin-bottom: 0em;
   }
 </style>
 {% endblock %}

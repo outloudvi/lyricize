@@ -17,6 +17,7 @@ class Lyric(models.Model):
     author = models.TextField(blank=True)
     category = models.TextField(blank=True)
     source = models.TextField(blank=True)
+    desc = models.TextField(blank=True)
 
     def __str__(self):
         return self.text
