@@ -37,6 +37,11 @@ def showLogout(request):
 def showSubmit(request):
     return render(request, 'submitLyric.html', {})
 
+def reSubmit(request,id):
+    return render(request, 'reSubmitLyric.html', {
+        "lyric": dLyric.objects.get(pk=id)
+    })
+
 def showLyric(request, id):
     lyric = dLyric.objects.get(pk=id)
     return render(request, 'showLyric.html', { "lyric": lyric })

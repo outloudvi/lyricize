@@ -24,6 +24,14 @@
           <div id="divDesc"></div>
           <div id="divDescMarkdown">{{ lyric.desc }}</div>
         </div>
+      </div>
+      {% if request.user.is_staff or request.user == lyric.user %}
+      <div class="cSpace"></div>
+      <a href="/new/{{lyric.id}}">
+        <button class="btn btn-light">Edit</button>
+      </a>
+      {% endif %}
+    </div>
     <div class="col-md-1">
     </div>
     <div id="idShow">#{{ lyric.id }}</div>

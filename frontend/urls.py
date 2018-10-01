@@ -21,6 +21,7 @@ urlpatterns = [
     path('s/c/<str:text>/', views.searchCategory, name='searchCategory'),
     path('s/', views.searchInterface, name='searchInterface'),
     path('new/', views.showSubmit, name='submitLyrics'),
+    path('new/<int:id>/', views.reSubmit, name='editLyrics'),
     path('u/<str:username>/', views.showUser, name='showUser'),
     path('u/<str:username>/contrib/', views.showContrib, name='showContrib'),
     path('u/<str:username>/contrib/<int:page>/', views.showContrib, name='showContrib_page'),
