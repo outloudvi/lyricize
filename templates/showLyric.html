@@ -48,6 +48,10 @@
 </script>
 <script src="https://cdn.staticfile.org/marked/0.5.1/marked.min.js"></script>
 <script>
+  marked.setOptions({
+    gfm: true,
+    sanitize: true
+  });
   $('#divDesc').html(marked($('#divDescMarkdown').text()));
 </script>
 {% endblock %}
