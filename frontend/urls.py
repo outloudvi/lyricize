@@ -25,4 +25,5 @@ urlpatterns = [
     path('u/<str:username>/', views.showUser, name='showUser'),
     path('u/<str:username>/contrib/', views.showContrib, name='showContrib'),
     path('u/<str:username>/contrib/<int:page>/', views.showContrib, name='showContrib_page'),
+    path('random/', views.showRandom),
 ]

@@ -4,6 +4,7 @@ from django.template import loader
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User as sUser
+from random import randint
 #from django.utils.http import urlquote
 
 from .models import User as dUser
@@ -28,6 +29,14 @@ def showLogin(request):
 
 def showRegister(request):
     return render(request, 'register.html', {})
+
+def showRandom(request):
+    count = dLyric.objects.count()
+    rndIndex = randint(1,count-1)
+    respLyric = dLyric.objects.get(pk = rndIndex)
+    return render(request, "showLyric.html", {
+        "lyric": respLyric
+    })
 
 
 def showLogout(request):

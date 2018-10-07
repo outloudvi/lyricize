@@ -51,6 +51,21 @@
       $('#liSubmit').addClass('active');
       return;
     }
+    if (pathname.match('^/random/$')) {
+      $('#liRandom').addClass('active');
+      randomRandom();
+      return;
+    }
+  }
+
+  randomRandom = () => {
+    let $random = $('#aRandom');
+    randomText = ['r','a','n','d','o','m'];
+    for(i=0;i<=5;i++){
+      if (Math.random() > 0.5)
+        randomText[i] = randomText[i].toUpperCase();
+    }
+    $random.text(randomText.join(''));
   }
 
   activeNavbar();

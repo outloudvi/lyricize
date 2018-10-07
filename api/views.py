@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from frontend.models import *
+from random import randint
 
 
 def index(request):
@@ -60,3 +61,16 @@ def reSubmitLyric(request,id):
         "status": "success",
         "id": lyric.id
     })
+
+def random(request):
+    count = Lyric.objects.count()
+    rndIndex = randint(1,count-1)
+    respLyric = Lyric.objects.get(pk = rndIndex)
+    return JsonResponse({
+        "text": respLyric.text,
+        "user": respLyric.user.id,
+        "author": respLyric.author,
+        "category": respLyric.category,
+        "source": respLyric.source,
+        "desc": respLyric.desc
+    });
