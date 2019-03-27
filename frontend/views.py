@@ -32,6 +32,13 @@ def showRegister(request):
 
 def showRandom(request):
     count = dLyric.objects.count()
+    if count == 0:
+        return render(request, "showLyric.html", {
+            "lyric": {
+                'id': 0,
+                'text': "I'm sorry, but nothing is found... \n Add a sentence here."
+            }
+        })
     rndIndex = randint(1,count-1)
     respLyric = dLyric.objects.get(pk = rndIndex)
     return render(request, "showLyric.html", {
